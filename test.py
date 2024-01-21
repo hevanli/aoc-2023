@@ -1,6 +1,5 @@
-lines = []
-with (open("input3.txt")) as file:
-    lines = [line.strip() for line in file.readlines()]
+test = {}
+test.update({"hi": ["1"]})
 
-print(len(lines[23]))
-print(lines[23][130])
+for thing in test:
+    print(thing)
