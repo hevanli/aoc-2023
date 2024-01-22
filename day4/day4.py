@@ -3,12 +3,12 @@ lines = []
 with (open(filename)) as file:
     lines = [line.strip() for line in file.readlines()]
 
-def part1():
-    winning_nums, nums_i_have = [], []
-    for line in lines:
-        winning_nums.append(line.split("|")[0][line.index(":")+2:].split())
-        nums_i_have.append(line.split("|")[1].split())
+winning_nums, nums_i_have = [], []
+for line in lines:
+    winning_nums.append(line.split("|")[0][line.index(":")+2:].split())
+    nums_i_have.append(line.split("|")[1].split())
 
+def part1():
     point_total = 0
     for i in range(len(winning_nums)):
         matches = 0
@@ -21,11 +21,6 @@ def part1():
     print(point_total)
 
 def part2():
-    winning_nums, nums_i_have = [], []
-    for line in lines:
-        winning_nums.append(line.split("|")[0][line.index(":")+2:].split())
-        nums_i_have.append(line.split("|")[1].split())
-
     copies = []
     for i in range(len(lines)):
         copies.append(1)
@@ -45,6 +40,7 @@ def part2():
 
     print(sum)
 
+part1()
 part2()
 
 
