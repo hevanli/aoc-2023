@@ -1,4 +1,5 @@
 import time
+from math import sqrt, ceil, floor
 
 filename = "input6.txt"
 lines = []
@@ -49,14 +50,29 @@ def part2_smarter():
             break
 
     print(last_win - first_win + 1)
+
+def part2_smartest():
+    t,d = "",""
+    for s in lines[0].split()[1:]: t += s
+    for s in lines[1].split()[1:]: d += s
+    t,d = int(t),int(d)
+
+    r1 = (t - sqrt(t ** 2 - 4 * d)) / 2
+    r2 = (t + sqrt(t ** 2 - 4 * d)) / 2
+    r1 = ceil(r1) if r1 // 1 != r1 else r1 + 1
+    r2 = floor(r2) if r2 // 1 != r2 else r2 + 1
+
+    print(r2 - r1 + 1)
  
 brute_start = time.time()
-part2_brute()
+#part2_brute()
 brute_end = time.time()
 
 smart_start = time.time()
-part2_smarter()
+#part2_smarter()
 smart_end = time.time()
 
 print("Brute algorithm took:", brute_end - brute_start, "seconds.")
 print("Smart algorithm took:", smart_end - smart_start, "seconds.")
+
+part2_smartest()
