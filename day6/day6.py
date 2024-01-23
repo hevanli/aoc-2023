@@ -1,3 +1,5 @@
+import time
+
 filename = "input6.txt"
 lines = []
 with (open(filename)) as file:
@@ -18,15 +20,10 @@ def part1():
     print(total)
 
 def part2_brute():
-    time = ""
-    for s in lines[0].split()[1:]:
-        time += s
-    time = int(time)
-
-    distance = ""
-    for s in lines[1].split()[1:]:
-        distance += s
-    distance = int(distance)
+    time,distance = "",""
+    for s in lines[0].split()[1:]: time += s
+    for s in lines[1].split()[1:]: distance += s
+    time,distance = int(time),int(distance)
 
     count = 0
     for t in range(1, time):
@@ -35,5 +32,31 @@ def part2_brute():
 
     print(count)
 
-part2_brute()
+def part2_smarter():
+    time,distance = "",""
+    for s in lines[0].split()[1:]: time += s
+    for s in lines[1].split()[1:]: distance += s
+    time,distance = int(time),int(distance)
 
+    first_win, last_win = 0,0
+    for i in range(0, time):
+        if (time - i) * i > distance:
+            first_win = i
+            break
+    for i in range(time, 0, -1):
+        if (time - i) * i > distance:
+            last_win = i
+            break
+
+    print(last_win - first_win + 1)
+ 
+brute_start = time.time()
+part2_brute()
+brute_end = time.time()
+
+smart_start = time.time()
+part2_smarter()
+smart_end = time.time()
+
+print("Brute algorithm took:", brute_end - brute_start, "seconds.")
+print("Smart algorithm took:", smart_end - smart_start, "seconds.")
