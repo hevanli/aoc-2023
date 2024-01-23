@@ -41,7 +41,7 @@ def part1():
 
     print(min_location)
 
-def min_location_from_seed_range(maps, seed_range):
+def min_seed_range_location(maps, seed_range):
     cur_ranges = [seed_range]
     for map in maps:
         ranges_to_check = cur_ranges
@@ -128,12 +128,8 @@ def part2():
 
     min_location = 1e12 # arbitrarily large value
     for seed_range in seed_ranges:
-        print("For seed range ", seed_range, ", this is its current ranges")
-        new_min = min_location_from_seed_range(maps, seed_range)
-        min_location = min(min_location, new_min)
-        print(new_min)
+        min_location = min(min_location, min_seed_range_location(maps, seed_range))
 
-    print("\nMin Location Found: ")
     print(min_location)
 
 part2()
