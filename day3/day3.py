@@ -1,4 +1,4 @@
-filename = "testInput.txt"
+filename = "input3.txt"
 lines = []
 with (open(filename)) as file:
     lines = [line.strip() for line in file.readlines()]
@@ -51,11 +51,12 @@ def part1():
 def part2():
     sum,row = 0,0
     gears = {}
+
     while (row < len(lines)):
         col = 0
         while (col < len(lines[0])):
             if lines[row][col].isdigit():
-                part_num, touches_gear = "", False
+                part_num = ""
                 gear_positions = []
 
                 while (col < len(lines[0]) and lines[row][col].isdigit()):
@@ -63,7 +64,6 @@ def part2():
                     neighbors = get_neighbors(row, col)
                     for neighbor in neighbors.keys():
                         if neighbor == "*":
-                            touches_gear = True
                             gear_positions.append(neighbors[neighbor])
                     col += 1
 
