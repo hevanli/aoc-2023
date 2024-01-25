@@ -27,7 +27,7 @@ def part1():
         if flag:
             sum += i + 1
 
-    return sum
+    print(sum)
 
 def part2():
     sum = 0
@@ -52,9 +52,9 @@ def part2():
             g_b = max(g_b, b)
         sum += g_r * g_g * g_b
 
-    return sum
+    print(sum)
 
 
-print(part1())
-print(part2())
+part1()
+part2()
 

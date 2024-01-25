@@ -46,7 +46,7 @@ def part1():
             else:
                 col += 1
         row += 1
-    return sum
+    print(sum)
 
 def part2():
     sum,row = 0,0
@@ -81,6 +81,7 @@ def part2():
     for gear in gears:
         if len(gears[gear]) == 2:
             sum += gears[gear][0] * gears[gear][1]
-    return sum
+    print(sum)
 
-print(part2())
+part1()
+part2()

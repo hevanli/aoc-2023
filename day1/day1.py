@@ -11,7 +11,7 @@ def part1():
         nums = [char for char in line if char.isdigit()] 
         # combine first and last digit in list and add to sum
         sum += (int)(nums[0] + nums[len(nums) - 1]) 
-    return sum
+    print(sum)
 
 def part2():
     sum = 0
@@ -37,8 +37,9 @@ def part2():
                     if (line[i:].startswith(k)):
                         digits.append(replace[k])
                         break
+            # ignore irrelevant chars
         sum += (int)(digits[0] + digits[len(digits) - 1])
-    return sum
+    print(sum)
 
-print(part1())
-print(part2())
+part1()
+part2()
