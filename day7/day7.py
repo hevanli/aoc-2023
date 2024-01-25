@@ -5,16 +5,35 @@ lines = []
 with (open(filename)) as file:
     lines = [line.strip() for line in file.readlines()]
 
+# set to 1 or 2 depending on which part you're doing
+# so that I don't have to rewrite the functions
+part = 2
+
 def hand_strength(hand) -> int:
-    # initializing stuff
-    hand_dict= {}
+    # count occurences of each card in hand
+    hand_dict = {}
     for card in hand:
         if card not in hand_dict: hand_dict.update({card: 1})
         else: hand_dict[card] += 1
-    max_card_count = max(hand_dict.values())
-    
+
+    # all jokers hard-coded edge case
+    if part == 2 and 'J' in hand_dict and hand_dict['J'] == 5:
+        return 7
+
+    # used for part 2 only
+    highest_non_j = 0
+    for card in hand_dict:
+        if card != 'J': highest_non_j = max(hand_dict[card], highest_non_j)
+
+    max_card_count,num_unique = 0,0
+    if part == 2 and 'J' in hand_dict: # part 2
+        max_card_count = highest_non_j + hand_dict['J']
+        num_unique = len(hand_dict) - 1
+    else: # part 1
+        max_card_count = max(hand_dict.values())
+        num_unique = len(hand_dict)
+
     # determining hand strength
-    num_unique = len(hand_dict)
     if num_unique == 5: return 1 # high card
     elif num_unique == 4: return 2 # one pair
     elif num_unique == 3: # two pair or set
@@ -34,7 +53,6 @@ def cmp_hands(hand1: tuple[str, int], hand2: tuple[str, int]) -> int:
             "A": 14,
             "K": 13,
             "Q": 12,
-            "J": 11,
             "T": 10,
             "9": 9,
             "8": 8,
@@ -45,6 +63,7 @@ def cmp_hands(hand1: tuple[str, int], hand2: tuple[str, int]) -> int:
             "3": 3,
             "2": 2,
             }
+    cards.update({"J": 11} if part == 1 else {"J": 1})
 
     strength1 = hand_strength(hand_1)
     strength2 = hand_strength(hand_2)
@@ -58,7 +77,7 @@ def cmp_hands(hand1: tuple[str, int], hand2: tuple[str, int]) -> int:
                 return -1
     return 0
 
-def part1():
+def solution():
     hands = []
     for line in lines:
         hand = line.split()
@@ -70,8 +89,6 @@ def part1():
         sum += (i + 1) * hand[1]
     print(sum)
 
+# to switch between parts, change the "part" variable at the top
+solution()
 
-def part2():
-    return
-
-part1()
