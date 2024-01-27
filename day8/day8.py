@@ -23,5 +23,8 @@ def part1():
 
     print(steps)
 
+def part2():
+    return
+
 part1()
             
