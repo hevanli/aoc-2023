@@ -1,4 +1,4 @@
-filename = "input.txt"
+filename = "testInput.txt"
 lines = []
 with (open(filename)) as file:
     lines = [line.strip() for line in file.readlines()]
@@ -24,7 +24,17 @@ def part1():
     print(steps)
 
 def part2():
-    return
+    moves = lines[0]
+    node_network = {}
+    for line in lines[2:]:
+        parts = line.split()
+        key = parts[0]
+        node = (parts[2][1:len(parts[2])-1], parts[3][:len(parts[3])-1])
+        node_network.update({key: node})
 
-part1()
+    for k,v in node_network.items():
+        print(k,v)
+    
+
+part2()
             
