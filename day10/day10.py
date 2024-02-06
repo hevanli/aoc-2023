@@ -12,12 +12,7 @@ def part2(filename: str) -> None:
     lines = parse(filename)
     return
 
-print("--test 1--")
+print("--test1--")
 part1("testInput.txt")
-print("--real 1--")
-part1("input.txt")
-
-print("--test 2--")
-part2("testInput.txt")
-print("--real 2--")
+print("--real--")
 part2("input.txt")
