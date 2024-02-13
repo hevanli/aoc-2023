@@ -6,18 +6,9 @@ def parse(filename: str) -> list[str]:
 
 def part1(filename: str) -> None:
     lines = parse(filename)
-    return
 
 def part2(filename: str) -> None:
     lines = parse(filename)
-    return
 
-print("--test 1\n--")
+print("--test 1--")
 part1("testInput.txt")
-print("--real 1\n--")
-part1("input.txt")
-
-print("--test 2\n--")
-part2("testInput.txt")
-print("--real 2\n--")
-part2("input.txt")
