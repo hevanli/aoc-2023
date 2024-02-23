@@ -8,6 +8,7 @@ def valid(record: str, target: list[int]) -> bool:
     t_idx = 0
     in_spring = False
     cur_len = 0
+
     for c in record:
         if c == "#" and in_spring: 
             cur_len += 1
@@ -20,27 +21,48 @@ def valid(record: str, target: list[int]) -> bool:
             cur_len = 0
             t_idx += 1
     
-    if t_idx == len(target) - 1 and target[t_idx] != cur_len: return False
-    return True
+    if t_idx > len(target) - 1 and cur_len: return False # too many #'s
+    if t_idx < len(target) - 1: return False # didn't reach the last target
+    if t_idx == len(target) - 1 and target[t_idx] != cur_len: return False # didn't complete last target
+    return True # otherwise, it's valid!
 
-def num_combos_valid(record: str, target: list[int]):
-    q_count = record.count("?")
-    q_idxs = [i for i,v in enumerate(record) if v == "?"]
+def all_combos(record: str) -> list[str]:
+    steps = []
 
-    window_len = 0
-    while window_len <= q_count:
-        window_position = 0
-        while window_position < len(record) - window_len:
-
-        
-
-
-    print(q_idxs)
+    for i,c in enumerate(record):
+        if c == "?":
+            if len(steps) == 0:
+                dot = record[0:i] + "." + record[i+1:]
+                hash = record[0:i] + "#" + record[i+1:]
+                steps.append([dot, hash])
+            else:
+                cur_step = []
+                for elem in steps[len(steps)-1]:
+                    cur_step.append(elem[0:i] + "." + elem[i+1:])
+                    cur_step.append(elem[0:i] + "#" + elem[i+1:])
+                steps.append(cur_step)
+    
+    return steps[len(steps)-1]
 
 def part1(filename: str) -> None:
     lines = parse(filename)
     records = [line.split()[0] for line in lines]
     targets = [[int(n) for n in line.split()[1].split(',')] for line in lines]
 
+    count = 0
+    for i,record in enumerate(records):
+        cur_count = 0
+        target = targets[i]
+        combos = all_combos(record)
+        for combo in combos:
+            if valid(combo, target):
+                count += 1
+                cur_count += 1
+    
+    print("The solution is:", count)
+
 print("--test 1--")
 part1("testInput.txt")
+
+print("--real 1--")
+part1("input.txt")
