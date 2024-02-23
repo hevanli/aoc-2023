@@ -51,18 +51,52 @@ def part1(filename: str) -> None:
 
     count = 0
     for i,record in enumerate(records):
-        cur_count = 0
+        cur_count = 0 # get rid of later
         target = targets[i]
         combos = all_combos(record)
         for combo in combos:
             if valid(combo, target):
                 count += 1
                 cur_count += 1
+        print("Line",i,"has",cur_count,"solutions")
     
     print("The solution is:", count)
 
-print("--test 1--")
-part1("testInput.txt")
+# improve upon alg, make it recursive so the required memory doesn't grow so crazily
+# then... idfk tbh
+def part2(filename: str) -> None:
+    lines = parse(filename)
+    records = []
+    records = [((line.split()[0]+"?")*5)[:-1] for line in lines]
+    targets = [[int(n) for n in line.split()[1].split(',')]*5 for line in lines]
 
-print("--real 1--")
-part1("input.txt")
+    # for record in records: print(record)
+    # for target in targets: print(target)
+
+    count = 0
+    for i,record in enumerate(records):
+        target = targets[i]
+        print("CURRENT RECORD:", record)
+        print("CURRENT TARGET:", target)
+
+        cur_count = 0 # get rid of later
+        combos = all_combos(record)
+        print("ALL COMBOS:", combos)
+
+        for combo in combos:
+            if valid(combo, target):
+                count += 1
+                cur_count += 1
+        print("Line",i,"has",cur_count,"solutions")
+    
+    print("The solution is:", count)
+    
+
+#print("--test 1--")
+#part1("testInput.txt")
+
+print("--test 2--")
+part2("testInput.txt")
+
+#print("--real 1--")
+#part1("input.txt")
